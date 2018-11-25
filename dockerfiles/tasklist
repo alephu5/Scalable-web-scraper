@@ -1,0 +1,8 @@
+FROM python:3-slim
+ADD ./dockerfiles/py_req.txt /app/requirements.txt
+ADD run_tasks.py /app/
+ADD top-1m.csv /app/
+ADD ./task_manager /app/task_manager
+WORKDIR /app/
+RUN pip install -r requirements.txt
+CMD ["python", "run_tasks.py", "10000"]

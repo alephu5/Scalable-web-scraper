@@ -1,0 +1,38 @@
+version: '3'
+services:
+    rabbit:
+        container_name: rabbit
+        image: rabbitmq:management
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=pass
+        ports:
+            - "5673:5672"
+            - "15673:15672"
+    
+    worker:
+        build:
+            context: .
+            dockerfile: ./dockerfiles/worker
+        volumes:
+            - .:/app
+        depends_on:
+            - rabbit
+            - database
+        restart: on-failure
+
+    tasklist:
+        build:
+            context: .
+            dockerfile: ./dockerfiles/tasklist
+        volumes:
+            - .:/app
+        depends_on:
+            - worker
+        restart: on-failure
+
+    database:
+        container_name: mongo
+        image: mongo:latest
+        ports:
+            - "27018:27017"

@@ -1,0 +1,7 @@
+FROM python:3-slim
+ADD ./dockerfiles/py_req.txt /app/requirements.txt
+ADD ./task_manager/ /app/
+WORKDIR /app/
+RUN useradd -r worker
+RUN pip install -r requirements.txt
+ENTRYPOINT celery -A task_manager worker --uid worker --concurrency=120
