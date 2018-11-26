@@ -49,6 +49,15 @@ environment:
 N workers can be deployed by running
 `docker-compose up --scale workers=N`
 
+The status of the broker can be monitored from a browser by navigating to
+
+`localhost:5673`
+
+and the mongo database can be accessed by directing the GUI to
+`localhost:27018`
+
+These services have been mapped to these non-standard ports to avoid conflicts on the host machine.
+
 ## Going forward
 
 This project provides a web crawling prototype that is capable of beyond deployed on a single-machine, in a cluster or on cloud and scaled up accordingly. The modular container-based framework makes it possible to add extra features such as load-balancing.
