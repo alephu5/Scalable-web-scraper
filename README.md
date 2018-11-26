@@ -27,6 +27,28 @@ builtin urllib library includes a robots parser but I found that this failed to 
 
 Another issue is how internal and external links are identified. The procedure discards empty links or those that have '#', and tries to filter external links by searching for 'http://' or 'https://' in the link but this is far from perfect as it identifies en.wikipedia.org as an internal link and tries to connect to 'http://www.wikipedia.org/en.wikipedia.org'. To properly overcome this is quite difficult as a path can be, relative such as `index.html` which should resolve to http://baseurl/index.html or external such as `external.org` that should resolve to http://external.org. Solving these issues is outside the intended scope of this project.
 
+## How to use
+This does not yet work with the docker stack because I have not found how to give the broker and mongo servers names that are resolved by the network, but with docker-compose it works. Fetch the files from this repository and execute:
+
+`docker-compose build`
+`docker-compose up`
+
+The number of threads in a single worker can be changed by modifying the `$CONCURRENCY` variable in 'docker-compose.yml', under 'worker'
+
+```
+environment:                                                                                                                                       
+    - CONCURRENCY=100
+```
+
+and the number of pages read can be changed by modifying the `$NUMPAGES` variable, under 'tasklist'
+```
+environment:                                                                                                                                       
+    - NUMPAGES=10000 
+```
+
+N workers can be deployed by running
+`docker-compose up --scale workers=N`
+
 ## Going forward
 
 This project provides a web crawling prototype that is capable of beyond deployed on a single-machine, in a cluster or on cloud and scaled up accordingly. The modular container-based framework makes it possible to add extra features such as load-balancing.

@@ -1,7 +1,8 @@
 FROM python:3-slim
+ENV CONCURRENCY 100
 ADD ./dockerfiles/py_req.txt /app/requirements.txt
-ADD ./task_manager/ /app/
+ADD ./task_manager/ /app/task_manager
 WORKDIR /app/
 RUN useradd -r worker
 RUN pip install -r requirements.txt
-ENTRYPOINT celery -A task_manager worker --uid worker --concurrency=120
+ENTRYPOINT celery -A task_manager worker --uid worker --concurrency=$CONCURRENCY
