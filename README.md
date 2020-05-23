@@ -1,4 +1,4 @@
-A Scalable Web Crawling Prototype
+# A Scalable Web Crawling Prototype
 
 Web crawlers are technologies used to map the internet, typically for academic or business purposes. The most primitive versions in the 1990s ran on single machines looping through IP addresses and extracting basic metadata, to provide users with a searchable directory, but since then a combination of exponential internet growth and commercial competition has driven the sophistication of crawlers to eyewatering heights. A considerable challenge for these technologies is how to filter and interpret the data which is not a problem at all addressed by this prototype, rather this is here to demonstrate a simple but scalable architecture for making large numbers of connections using a single machine or cluster.
 
